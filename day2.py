@@ -12,9 +12,17 @@ def get_input(input_file: str) -> dict[list[dict[str, int]]]:
     output = {}
     with open(input_file, "r") as input:
         for line in input:
-            if line != "":
+            if not line == "":
                 # parse line into data structure
                 # Game 1: 1 red, 5 blue, 1 green; 16 blue, 3 red; 6 blue, 5 red; 4 red, 7 blue, 1 green
+                # example = {
+                #     2: [
+                #         {"red": 1, "blue": 5, "green": 1},
+                #         {"blue": 16, "red": 3},
+                #         {"blue": 6, "red": 5},
+                #         {"red": 4, "blue": 7, "green": 1},
+                #     ]
+                # }
                 # get the game id
                 game_str, result_str = [x.strip() for x in line.split(":")]
                 game_id = int("".join([char for char in game_str if char.isdigit()]))
@@ -32,25 +40,22 @@ def get_input(input_file: str) -> dict[list[dict[str, int]]]:
 
 def puzzle1(input_dict: dict[list[dict[str, int]]], possible_contents: dict[str, int]) -> int:
     # Check if a game has a result that reveals too many cubes of given colour.
-    # Aggregate game ids
-    id_total = 0
-    impossible_total = 0
+    # Aggregate game ids of all games, and the impossible games
+    # return the difference, the sum of the possible games
+    total = 0
     for id, results in input_dict.items():
-        id_total += id
         possible = True
         for eachResult in results:
             for eachColour, count in possible_contents.items():
-                try:
-                    if eachResult[eachColour] > count:
-                        impossible_total += id
-                        possible = False
-                        break
-                except KeyError:
-                    continue
+                if eachResult.get(eachColour, 0) > count:
+                    possible = False
+                    break
             if not possible:
                 break
+        if possible:
+            total += id
 
-    return id_total - impossible_total
+    return total
 
 
 def puzzle2(input_dict: dict[list[dict[str, int]]]) -> int:
