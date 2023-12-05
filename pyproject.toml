@@ -1,0 +1,23 @@
+# ==== black ====
+[tool.black]
+line-length = 99
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 99
+skip = ["env/"]
+skip_glob = ["**/migrations/*.py"]
+
+# ==== mypy ====
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+plugins = [
+    "mypy_django_plugin.main",
+    "mypy_drf_plugin.main",
+]

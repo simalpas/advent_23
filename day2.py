@@ -14,7 +14,8 @@ def get_input(input_file: str) -> dict[list[dict[str, int]]]:
         for line in input:
             if not line == "":
                 # parse line into data structure
-                # Game 1: 1 red, 5 blue, 1 green; 16 blue, 3 red; 6 blue, 5 red; 4 red, 7 blue, 1 green
+                # Game 1: 1 red, 5 blue, 1 green; 16 blue,\
+                # 3 red; 6 blue, 5 red; 4 red, 7 blue, 1 green
                 # example = {
                 #     2: [
                 #         {"red": 1, "blue": 5, "green": 1},
@@ -83,6 +84,6 @@ if __name__ == "__main__":
         "green": 13,
         "blue": 14,
     }
-    input = get_input("day2_input.txt")
+    input = get_input("data/day2data.txt")
     print(f"Puzzle 1 result = {puzzle1(input, possible_contents)}")
     print(f"Puzzle 2 result = {puzzle2(input)}")
