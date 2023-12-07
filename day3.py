@@ -47,6 +47,7 @@ class Day3:
         # if one is found look around for a digit
         # don't check in previously retrieved locations
         # grab the full number if a digit is found
+        self.excluded = []  # reset
         if test:
             self.data = self.sample_data
         for y_index, line in enumerate(self.data):
@@ -68,6 +69,7 @@ class Day3:
         return sum(self.part_numbers)
 
     def task2(self, test=False):
+        self.excluded = []  # reset from first task
         if test:
             self.data = self.sample_data
         for y_index, line in enumerate(self.data):
@@ -95,5 +97,5 @@ if __name__ == "__main__":
     # for line in getInput("data/day3data.txt"):
     #     print(line)
     day3 = Day3("data/day3data.txt")
-    # print(f"task1: {day3.task1()}")
+    print(f"task1: {day3.task1()}")
     print(f"task2: {day3.task2()}")
