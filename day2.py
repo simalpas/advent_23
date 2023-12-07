@@ -32,14 +32,18 @@ def get_input(input_file: str) -> dict[list[dict[str, int]]]:
                 for subgame in [x.strip() for x in result_str.split(";")]:
                     subgame_result = {}
                     for eachColour in subgame.split(","):
-                        count, colour = [x.strip() for x in eachColour.strip().split(" ")]
+                        count, colour = [
+                            x.strip() for x in eachColour.strip().split(" ")
+                        ]
                         subgame_result[colour] = int(count)
                     results.append(subgame_result)
                 output[game_id] = results
     return output
 
 
-def puzzle1(input_dict: dict[list[dict[str, int]]], possible_contents: dict[str, int]) -> int:
+def puzzle1(
+    input_dict: dict[list[dict[str, int]]], possible_contents: dict[str, int]
+) -> int:
     # Check if a game has a result that reveals too many cubes of given colour.
     # Aggregate game ids of all games, and the impossible games
     # return the difference, the sum of the possible games
